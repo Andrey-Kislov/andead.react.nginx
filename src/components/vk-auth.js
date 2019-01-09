@@ -9,7 +9,8 @@ export default class VKAuth extends Component {
                 'response_type=code&' + 
                 'client_id=6809010&' + 
                 'scope=offline&' + 
-                'redirect_uri=' + location.origin + '/social/provider';
+                'redirect_uri=http://localhost:5051/api/oauth/vk';
+                // 'redirect_uri=' + location.origin + '/oauth/provider/vk';
     }
 
     render() {

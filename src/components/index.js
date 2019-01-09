@@ -22,10 +22,10 @@ class Index extends Component {
 
         if (accessToken) {
             try {
-                const response = await axios.get('/auth', { headers: { 'Authorization': 'Bearer ' + accessToken } });
+                const response = await axios.get('http://localhost:5051/api/oauth/login', { headers: { 'Authorization': 'Bearer ' + accessToken } });
                 console.log(response);
 
-                this.setState({ authUser: response });
+                this.setState({ authUser: response.data });
             } catch (error) {
                 console.error(error);
             }
