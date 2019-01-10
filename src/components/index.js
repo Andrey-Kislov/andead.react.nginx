@@ -13,7 +13,9 @@ class Index extends Component {
         this.cookiesName = 'access_token';
 
         this.state = {
-            authUser: null
+            authUser: null,
+            loading: true,
+            hasError: false
         };
     }
 
@@ -25,9 +27,11 @@ class Index extends Component {
                 const response = await axios.get('http://localhost:5051/api/oauth/login', { headers: { 'Authorization': 'Bearer ' + accessToken } });
                 console.log(response);
 
-                this.setState({ authUser: response.data });
+                this.setState({ authUser: response.data, loading: false });
             } catch (error) {
                 console.error(error);
+
+                this.setState({ loading: false, hasError: true });
             }
         }
     }
@@ -41,7 +45,11 @@ class Index extends Component {
             <>
                 <h4>This is test React Component</h4>
 
-                <VKAuth authUser={this.state.authUser} />
+                <VKAuth 
+                    authUser={this.state.authUser} 
+                    loading={this.state.loading} 
+                    hasError={this.state.hasError}
+                />
             </>
         );
     }
