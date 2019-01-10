@@ -24,16 +24,18 @@ class Index extends Component {
 
         if (accessToken) {
             try {
-                const response = await axios.get('http://localhost:5051/api/oauth/login', { headers: { 'Authorization': 'Bearer ' + accessToken } });
+                const response = await axios.get(location.origin + '/social/provider/login', { headers: { 'Authorization': 'Bearer ' + accessToken } });
                 console.log(response);
 
-                this.setState({ authUser: response.data, loading: false });
+                this.setState({ authUser: response.data });
             } catch (error) {
                 console.error(error);
 
-                this.setState({ loading: false, hasError: true });
+                this.setState({ hasError: true });
             }
         }
+
+        this.setState({ loading: false });
     }
 
     componentWillMount() {
