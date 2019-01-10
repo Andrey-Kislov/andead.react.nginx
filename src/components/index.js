@@ -45,7 +45,7 @@ class Index extends Component {
     render() {
         return (
             <>
-                <h4>This is test React Component</h4>
+                {/* <h4>This is test React Component</h4> */}
 
                 <VKAuth 
                     authUser={this.state.authUser} 
