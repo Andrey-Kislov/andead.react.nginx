@@ -7,8 +7,8 @@ module.exports = {
         index: './src/components/index'
     },
     output: {
-        path: path.resolve(__dirname, './public', (process.env.NODE_ENV === 'production' ? 'assets' : '')),
-        publicPath: (process.env.NODE_ENV === 'production' ? '/assets/' : 'http://localhost:3000/'),
+        path: path.resolve(__dirname, './public', (process.env.NODE_ENV === 'development' ? '' : 'assets')),
+        publicPath: (process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/assets/'),
         filename: "[name].[hash].bundle.js"
     },
     devtool: 'source-map',
@@ -33,7 +33,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             template: './src/index.html',
-            filename: (process.env.NODE_ENV === 'production' ? '../index.html' : 'index.html'),
+            filename: (process.env.NODE_ENV === 'development' ? 'index.html' : '../index.html'),
             inject: 'body'
         }),
     ],
