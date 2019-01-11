@@ -4,13 +4,15 @@ import '../styles/vk-auth.css';
 
 export default class VKAuth extends Component {
     authorize() {
+        var redirectUri = location.origin + '/social/provider/vk';
+
         location.href = 
             'https://oauth.vk.com/authorize?' + 
                 'response_type=code&' + 
                 'client_id=6809010&' + 
                 'scope=offline&' + 
-                'redirect_uri=' + location.origin + '/social/provider/vk';
-                // 'redirect_uri=' + location.origin + '/api/oauth/vk';
+                'redirect_uri=' + redirectUri + '&' + 
+                'state=' + redirectUri;
     }
 
     render() {
