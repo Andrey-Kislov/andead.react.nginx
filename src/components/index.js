@@ -1,63 +1,47 @@
 import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import axios from 'axios';
+import { Provider, connect } from 'react-redux';
 
+import configureStore from '../store/configureStore';
+import { checkAuthUser } from '../actions/authorize';
 import VKAuth from './vk-auth';
 
-class Index extends Component {
+class _Index extends Component {
     constructor(props) {
         super(props);
 
         this.cookies = new Cookies();
         this.cookiesName = 'access_token';
-
-        this.state = {
-            authUser: null,
-            loading: true,
-            hasError: false
-        };
-    }
-
-    async checkAuthUser() {
-        const accessToken = this.cookies.get(this.cookiesName);
-
-        if (accessToken) {
-            try {
-                const response = await axios.get(location.origin + '/social/provider/login', { headers: { 'Authorization': 'Bearer ' + accessToken } });
-                console.log(response);
-
-                this.setState({ authUser: response.data });
-            } catch (error) {
-                console.error(error);
-
-                this.setState({ hasError: true });
-            }
-        }
-
-        this.setState({ loading: false });
     }
 
     componentWillMount() {
-        this.checkAuthUser();
+        this.props.checkAuthUser(this.cookies.get(this.cookiesName));
     }
 
     render() {
         return (
             <>
-                {/* <h4>This is test React Component</h4> */}
-
-                <VKAuth 
-                    authUser={this.state.authUser} 
-                    loading={this.state.loading} 
-                    hasError={this.state.hasError}
-                />
+                <VKAuth />
             </>
         );
     }
 }
 
+export const store = configureStore();
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        checkAuthUser: (accessToken) => dispatch(checkAuthUser(accessToken))
+    };
+};
+
+const Index = connect(null, mapDispatchToProps)(_Index);
+export default Index;
+
 ReactDOM.render(
-    <Index />,
+    <Provider store={store}>
+        <Index />
+    </Provider>,
     document.getElementById('index')
 );

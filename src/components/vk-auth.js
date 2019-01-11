@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import '../styles/vk-auth.css';
 
-export default class VKAuth extends Component {
+class VKAuth extends Component {
     authorize() {
         var redirectUri = location.origin + '/social/provider/vk';
 
@@ -31,3 +32,13 @@ export default class VKAuth extends Component {
         return <div className="button-auth" onClick={() => this.authorize()}>Войти через ВКонтакте</div>
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        authUser: state.authorize.authUser,
+        loading: state.authorize.loading,
+        hasError: state.authorize.hasError
+    };
+};
+
+export default connect(mapStateToProps)(VKAuth);
