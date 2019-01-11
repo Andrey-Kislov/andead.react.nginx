@@ -3,7 +3,8 @@ import { ACTION_AUTHORIZE } from '../actions/constants';
 const initialState = {
     authUser: null,
     loading: true,
-    hasError: false
+    hasError: false,
+    accessToken: null
 };
 
 export function authorize(state = initialState, action) {
@@ -21,6 +22,11 @@ export function authorize(state = initialState, action) {
         case ACTION_AUTHORIZE.setError:
             return Object.assign({}, state, {
                 hasError: action.hasError
+            });
+
+        case ACTION_AUTHORIZE.setAccessToken:
+            return Object.assign({}, state, {
+                accessToken: action.accessToken
             });
 
         default:

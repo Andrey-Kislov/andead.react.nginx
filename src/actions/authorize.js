@@ -1,6 +1,5 @@
-import axios from 'axios';
-
 import { ACTION_AUTHORIZE } from './constants';
+import { getAuthUser } from '../services/authorize';
 
 export function setAuthUser(authUser) {
     return {
@@ -23,23 +22,24 @@ export function setError(hasError) {
     };
 }
 
+export function setAccessToken(accessToken) {
+    return {
+        type: ACTION_AUTHORIZE.setAccessToken,
+        accessToken
+    };
+}
+
 export function checkAuthUser(accessToken) {
     return (dispatch) => {
         dispatch(setLoading(true));
 
         if (accessToken) {
-            axios.get(location.origin + '/social/provider/login', {
-                headers: { 'Authorization': 'Bearer ' + accessToken
-            }})
-            .then(response => {
-                console.log(response);
-                dispatch(setAuthUser(response.data));
-            })
-            .catch(error => {
-                console.error(error);
-                dispatch(setError(true));
-            })
-            .finally(() => dispatch(setLoading(false)));
+            dispatch(setAccessToken(accessToken));
+
+            getAuthUser()
+                .then(response => dispatch(setAuthUser(response)))
+                .catch(() => dispatch(setError(true)))
+                .finally(() => dispatch(setLoading(false)));
         } else {
             dispatch(setLoading(false));
         }
