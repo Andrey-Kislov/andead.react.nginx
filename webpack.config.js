@@ -43,6 +43,7 @@ module.exports = {
         port: 3000,
         host: 'localhost',
         inline: true,
+        historyApiFallback: true,
         headers: { "Access-Control-Allow-Origin": "*" }
     }
 }
