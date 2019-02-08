@@ -1,10 +1,24 @@
+/* body {
+    background: white;    
+} */
 
-html {
-    font-size: 1rem;
+@media screen and (min-width: 980px) /* Desktop */ {
+    html {
+        /* background: red; */
+        font-size: 1rem;
+    }
 }
 
-@media only screen and (max-width: 768px) {
+@media screen  and (max-width: 979px) /* Tablet */ {
     html {
-        font-size: 2rem;
+        /* background: blue; */
+        font-size: 1.4rem;
+    }
+}
+
+@media screen and (max-width: 500px) /* Mobile */ {
+    html {
+        /* background: green; */
+        font-size: 1.6rem;
     }
 }
