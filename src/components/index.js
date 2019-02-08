@@ -10,6 +10,8 @@ import VKAuth from './vk-auth';
 import Home from './home';
 import About from './about';
 
+import '../styles/globals.css';
+
 class _Index extends Component {
     constructor(props) {
         super(props);
