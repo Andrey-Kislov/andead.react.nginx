@@ -1,6 +1,15 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
- 
+
+const CSSModuleLoader = {
+    loader: 'css-loader',
+    options: {
+        modules: true,
+        sourceMap: true,
+        localIdentName: '[name]__[local]___[hash:base64:5]'
+    }
+}
+
 module.exports = {
     mode: 'development',
     entry: {
@@ -26,7 +35,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 exclude: /(node_modules)/,
-                use: ['style-loader', 'css-loader']
+                // use: ['style-loader', 'css-loader']
+                use: ['style-loader', CSSModuleLoader]
             }
         ]
     },

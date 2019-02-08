@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import '../styles/vk-auth.css';
+import styles from '../styles/vk-auth.css';
 
 class VKAuth extends Component {
     authorize() {
@@ -29,7 +29,7 @@ class VKAuth extends Component {
             return <>Hello {this.props.authUser.first_name}</>
         }
 
-        return <div className="button-auth" onClick={() => this.authorize()}>Войти через ВКонтакте</div>
+        return <div className={styles.buttonAuth} onClick={() => this.authorize()}>Войти через ВКонтакте</div>
     }
 }
 
