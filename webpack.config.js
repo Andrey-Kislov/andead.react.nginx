@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { GenerateSW } = require('workbox-webpack-plugin');
 
 const CSSModuleLoader = {
     loader: 'css-loader',
@@ -46,6 +47,9 @@ module.exports = {
             filename: (process.env.NODE_ENV === 'development' ? 'index.html' : '../index.html'),
             inject: 'body'
         }),
+        new GenerateSW({
+            swDest: '../service-worker.js'
+        })
     ],
     devServer: {
         contentBase: '.',

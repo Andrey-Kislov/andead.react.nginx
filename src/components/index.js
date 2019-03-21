@@ -9,6 +9,7 @@ import { checkAuthUser } from '../actions/authorize';
 import VKAuth from './vk-auth';
 import Home from './home';
 import About from './about';
+import * as serviceWorker from '../services/serviceWorker';
 
 import '../styles/globals.css';
 
@@ -65,3 +66,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('index')
 );
+
+serviceWorker.register();
