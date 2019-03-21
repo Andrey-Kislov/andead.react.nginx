@@ -1,0 +1,15 @@
+{
+    "lang": "ru",
+    "name": "VK Logon",
+    "description": "React, Nginx, .NET Core, Docker",
+    "short_name": "VK Logon",
+    "icons": [{
+        "src": "images/icons/fraise-icon-32.png",
+        "sizes": "32x32"
+    }, {
+        "src": "images/icons/fraise-icon-128.png",
+        "sizes": "128x128"
+    }],
+    "start_url": "/",
+    "display": "fullscreen"
+}

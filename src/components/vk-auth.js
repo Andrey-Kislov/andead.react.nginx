@@ -4,16 +4,22 @@ import { connect } from 'react-redux';
 import styles from '../styles/vk-auth.css';
 
 class VKAuth extends Component {
+    constructor(props) {
+        super(props);
+
+        this.CLIENT_ID = '6809010';
+    }
+
     authorize() {
-        var redirectUri = location.origin + '/social/provider/vk';
+        var redirectUri = `${location.origin}/social/provider/vk`;
 
         location.href = 
             'https://oauth.vk.com/authorize?' + 
                 'response_type=code&' + 
-                'client_id=6809010&' + 
+                `client_id=${this.CLIENT_ID}&` + 
                 'scope=offline&' + 
-                'redirect_uri=' + redirectUri + '&' + 
-                'state=' + redirectUri;
+                `redirect_uri=${redirectUri}&` + 
+                `state=${redirectUri}`;
     }
 
     render() {

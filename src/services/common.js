@@ -6,7 +6,7 @@ export function getData(url, params = {}) {
     return new Promise((resolve, reject) => {
         axios.get(url, {
             headers: {
-                'Authorization': 'Bearer ' + store.getState().authorize.accessToken
+                'Authorization': `Bearer ${store.getState().authorize.accessToken}`
             },
             params: params
         })
