@@ -9,6 +9,9 @@
     }, {
         "src": "images/icons/fraise-icon-128.png",
         "sizes": "128x128"
+    }, {
+        "src": "images/icons/fraise-icon-512.png",
+        "sizes": "512x512"
     }],
     "start_url": "/",
     "display": "fullscreen"
