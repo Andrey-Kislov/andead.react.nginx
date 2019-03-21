@@ -14,5 +14,7 @@
         "sizes": "512x512"
     }],
     "start_url": "/",
-    "display": "fullscreen"
+    "display": "fullscreen",
+    "background_color": "#f1f5ff",
+    "theme_color": "#4a76a8"
 }
