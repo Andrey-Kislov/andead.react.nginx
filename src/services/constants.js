@@ -1,0 +1,5 @@
+
+export const CONSTANTS = {
+    MESSAGING_SENDER_ID: '934191126799',
+    VK_CLIENT_ID: '6809010'
+};
