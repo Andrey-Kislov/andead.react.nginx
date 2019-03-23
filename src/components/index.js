@@ -53,7 +53,7 @@ class _Index extends Component {
                     </>
                 </Router>
 
-                <p>
+                <p style={{ wordBreak: 'break-all' }}>
                     {this.state.userToken}
                 </p>
             </>
