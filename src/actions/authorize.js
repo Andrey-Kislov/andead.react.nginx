@@ -1,5 +1,6 @@
 import { ACTION_AUTHORIZE } from './constants';
 import { getAuthUser } from '../services/authorize';
+import { checkNotificationsPermission } from '../services/push-notifications';
 
 export function setAuthUser(authUser) {
     return {
@@ -37,7 +38,10 @@ export function checkAuthUser(accessToken) {
             dispatch(setAccessToken(accessToken));
 
             getAuthUser()
-                .then(response => dispatch(setAuthUser(response)))
+                .then(response => {
+                    dispatch(setAuthUser(response));
+                    checkNotificationsPermission();
+                })
                 .catch(() => dispatch(setError(true)))
                 .finally(() => dispatch(setLoading(false)));
         } else {

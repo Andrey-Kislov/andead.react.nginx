@@ -10,7 +10,7 @@ import VKAuth from './vk-auth';
 import Home from './home';
 import About from './about';
 import * as serviceWorker from '../services/serviceWorker';
-import { initializeFirebase, checkNotificationsPermission } from '../services/push-notifications';
+import { initializeFirebase } from '../services/push-notifications';
 
 import '../styles/globals.css';
 
@@ -20,17 +20,11 @@ class _Index extends Component {
 
         this.cookies = new Cookies();
         this.cookiesName = 'access_token';
-
-        this.state = {
-            userToken: null
-        };
     }
 
     componentDidMount() {
-        this.props.checkAuthUser(this.cookies.get(this.cookiesName));
-
         initializeFirebase();
-        checkNotificationsPermission().then((userToken) => this.setState({ userToken: userToken }));
+        this.props.checkAuthUser(this.cookies.get(this.cookiesName));
     }
 
     render() {
@@ -52,10 +46,6 @@ class _Index extends Component {
                         </Switch>
                     </>
                 </Router>
-
-                <p style={{ wordBreak: 'break-all' }}>
-                    {this.state.userToken}
-                </p>
             </>
         );
     }

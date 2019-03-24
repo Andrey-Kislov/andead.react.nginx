@@ -27,7 +27,11 @@ class VKAuth extends Component {
         // }
 
         if (this.props.authUser) {
-            return <>Hello {this.props.authUser.first_name}</>
+            return (
+                <div>
+                    Hello {this.props.authUser.first_name}
+                </div>
+            );
         }
 
         return (
