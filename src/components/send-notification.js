@@ -29,7 +29,7 @@ export default class SendNotification extends Component {
                                 Устройство №{index + 1} 
                                 <input
                                     type="button"
-                                    onClick={() => this.sendNotification(token)}
+                                    onClick={() => this.sendNotification(token.Token)}
                                     value="Отправить"
                                 />
                             </div>
