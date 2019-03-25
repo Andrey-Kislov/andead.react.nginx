@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { CONSTANTS } from '../services/constants';
 import styles from '../styles/vk-auth.css';
+import SendNotification from './send-notification';
 
 class VKAuth extends Component {
     authorize() {
@@ -30,6 +31,10 @@ class VKAuth extends Component {
             return (
                 <div>
                     Hello {this.props.authUser.first_name}
+
+                    <div>
+                        <SendNotification />
+                    </div>
                 </div>
             );
         }
