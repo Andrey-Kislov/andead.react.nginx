@@ -26,7 +26,8 @@ export function postData(url, data = {}) {
             JSON.stringify(data), {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${store.getState().authorize.accessToken}`
             }
         })
         .then((response) => resolve(response))
