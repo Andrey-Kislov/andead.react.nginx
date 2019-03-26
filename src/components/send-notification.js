@@ -11,7 +11,7 @@ export default class SendNotification extends Component {
     }
 
     sendNotification(token) {
-        postData('/notifications/send', { Token: token });
+        postData('/notifications/send', { token: token });
     }
 
     componentDidMount() {
