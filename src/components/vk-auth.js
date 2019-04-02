@@ -29,13 +29,13 @@ class VKAuth extends Component {
         //     return <>Ошибка загрузки компонента!</>
         // }
 
-        // if (this.props.authUser) {
+        if (this.props.authUser) {
             return (
                 <div>
-                    {/* Hello {this.props.authUser.first_name} */}
+                    Hello {this.props.authUser.first_name}
 
                     <div>
-                        {/* <SendNotification /> */}
+                        <SendNotification />
                     </div>
 
                     <div>
@@ -45,7 +45,7 @@ class VKAuth extends Component {
                     </div>
                 </div>
             );
-        // }
+        }
 
         return (
             <div
