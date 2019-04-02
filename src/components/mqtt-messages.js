@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardDeck } from 'react-bootstrap';
+import { Card, CardDeck, Alert } from 'react-bootstrap';
 import moment from 'moment';
 import { subscribe } from '@andrey.kislov/mqtt-react';
 
@@ -16,13 +16,21 @@ class MqttMessages extends Component {
         
         return (
             <>
+                <Alert className={styles.alert + (this.props.mqtt.connected ? ` ${styles.alertHide}` : '')} variant="secondary">
+                    Подключение к брокеру очередей...
+                </Alert>
+
                 <CardDeck className={styles.cardDeck}>
                     <Card className={styles.card}>
                         <Card.Body>
                             <Card.Title>Aqara Vibration Sensor</Card.Title>
-                            <Card.Img className={styles.cardImg} variant="top" src="images/devices/DJT11LM.jpg" />
+                            <Card.Img className={styles.cardImg} variant="top" src="/images/devices/DJT11LM.jpg" />
                             <Card.Text>
                                 Датчик обнаружения вибрации Aqara для умного дома Xiaomi.
+                            </Card.Text>
+                            <Card.Text>
+                                Угол X: 10<br/>
+                                Угол Y: 12<br/>
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
