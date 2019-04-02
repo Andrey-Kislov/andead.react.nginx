@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Connector } from '@andrey.kislov/mqtt-react';
 
 import { CONSTANTS } from '../services/constants';
 import styles from '../styles/vk-auth.css';
 import SendNotification from './send-notification';
+import MqttMessages from './mqtt-messages';
 
 class VKAuth extends Component {
     authorize() {
@@ -27,17 +29,23 @@ class VKAuth extends Component {
         //     return <>Ошибка загрузки компонента!</>
         // }
 
-        if (this.props.authUser) {
+        // if (this.props.authUser) {
             return (
                 <div>
-                    Hello {this.props.authUser.first_name}
+                    {/* Hello {this.props.authUser.first_name} */}
 
                     <div>
-                        <SendNotification />
+                        {/* <SendNotification /> */}
+                    </div>
+
+                    <div>
+                        <Connector mqttProps={CONSTANTS.MQTT_SERVER_URL}>
+                            <MqttMessages />
+                        </Connector>
                     </div>
                 </div>
             );
-        }
+        // }
 
         return (
             <div
