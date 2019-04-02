@@ -11,6 +11,17 @@ class MqttMessages extends Component {
         data: []
     }
 
+    getAction(action) {
+        switch (action) {
+            case 'tilt':
+                return 'наклон';
+            case 'vibration':
+                return 'вибрация';
+        }
+
+        return 'нет';
+    }
+
     render() {
         console.log(this.props.data);
         
@@ -31,6 +42,7 @@ class MqttMessages extends Component {
                             <Card.Text>
                                 Угол X: 10<br/>
                                 Угол Y: 12<br/>
+                                Действие: {this.getAction()}
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
