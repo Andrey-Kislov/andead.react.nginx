@@ -1,6 +1,6 @@
-/* body {
-    background: white;    
-} */
+body {
+    margin: 10px;
+}
 
 @media screen and (min-width: 980px) /* Desktop */ {
     html {

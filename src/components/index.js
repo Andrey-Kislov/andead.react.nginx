@@ -32,6 +32,7 @@ class _Index extends Component {
             <>
                 <VKAuth />
 
+                <br/>
                 <Router>
                     <>
                         <ul>

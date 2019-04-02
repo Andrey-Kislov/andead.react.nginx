@@ -1,0 +1,14 @@
+.cardDeck {
+    width: 100%;
+}
+
+@media screen and (min-width: 980px) /* Desktop */ {
+    .card {
+        max-width: 20%;
+    }
+}
+
+.cardImg {
+    width: 20%;
+    margin: 10px;
+}
