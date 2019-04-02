@@ -17,13 +17,21 @@ class MqttMessages extends Component {
                 return 'наклон';
             case 'vibration':
                 return 'вибрация';
+            case 'drop':
+                return 'падение';
         }
 
         return 'нет';
     }
 
+    getValue(value) {
+        return (value ? value : 'н/д');
+    }
+
     render() {
         console.log(this.props.data);
+
+        var sensor = this.props.data[0] || {};
         
         return (
             <>
@@ -40,9 +48,16 @@ class MqttMessages extends Component {
                                 Датчик обнаружения вибрации Aqara для умного дома Xiaomi.
                             </Card.Text>
                             <Card.Text>
-                                Угол X: 10<br/>
-                                Угол Y: 12<br/>
-                                Действие: {this.getAction()}
+                                Угол X: {this.getValue(sensor.angle_x)}<br/>
+                                Угол Y: {this.getValue(sensor.angle_y)}<br/>
+                                Угол Z: {this.getValue(sensor.angle_z)}<br/>
+                                Абсолютный угол X: {this.getValue(sensor.angle_x_absolute)}<br/>
+                                Абсолютный угол Y: {this.getValue(sensor.angle_y_absolute)}<br/>
+                                Связь: {this.getValue(sensor.linkquality)}<br/>
+                                Батарея: {this.getValue(sensor.battery)}<br/>
+                                Напряжение: {this.getValue(sensor.voltage)}<br/>
+                                Действие: {this.getAction(sensor.action)}<br/>
+                                Наклон: {sensor.angle ? sensor.angle : 'нет'}
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
@@ -50,10 +65,6 @@ class MqttMessages extends Component {
                         </Card.Footer>
                     </Card>
                 </CardDeck>
-
-                {/* {
-                    this.props.data.map(message => <div key={message.Timestamp}>{JSON.stringify(message)}</div>)
-                } */}
             </>
         );
     }
