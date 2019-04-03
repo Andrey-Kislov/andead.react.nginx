@@ -61,7 +61,9 @@ class MqttMessages extends Component {
                             </Card.Text>
                         </Card.Body>
                         <Card.Footer>
-                            <small className="text-muted">Последнее обновление {moment().format('HH:mm')}</small>
+                            <small className="text-muted">
+                                Последнее обновление {sensor.last_seen ? moment(sensor.last_seen).format('DD.MM.YYYY - HH:mm') : 'н/д'}
+                            </small>
                         </Card.Footer>
                     </Card>
                 </CardDeck>
