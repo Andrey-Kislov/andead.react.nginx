@@ -25,7 +25,7 @@ class MqttMessages extends Component {
     }
 
     getValue(value) {
-        return (value ? value : 'н/д');
+        return (value || value === 0 ? value : 'н/д');
     }
 
     render() {
