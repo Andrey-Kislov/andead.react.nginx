@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Card, CardDeck, Alert } from 'react-bootstrap';
 import moment from 'moment';
-import { subscribe } from '@andrey.kislov/mqtt-react';
+import { connect } from 'react-redux';
 
 import { CONSTANTS } from '../services/constants';
+import { connect as connectToMqtt, subscribe } from '../actions/mqtt';
 import styles from '../styles/cards.css';
 
-class MqttMessages extends Component {
+class _MqttMessages extends Component {
     static defaultProps = {
         data: []
     }
@@ -28,14 +29,24 @@ class MqttMessages extends Component {
         return (value || value === 0 ? value : 'н/д');
     }
 
-    render() {
-        console.log(this.props.data);
+    componentDidMount() {
+        this.props.connectToMqtt(CONSTANTS.MQTT_SERVER_URL);
 
-        var sensor = this.props.data[0] || {};
+        this.props.subscribe(CONSTANTS.MQTT_TOPIC);
+    }
+
+    render() {
+        console.log(this.props.message);
+        
+        if (!this.props.mqttClient) {
+            return null;
+        }
+
+        var sensor = this.props.message.payload || {};
         
         return (
             <>
-                <Alert className={styles.alert + (this.props.mqtt.connected ? ` ${styles.alertHide}` : '')} variant="secondary">
+                <Alert className={styles.alert + (this.props.mqttClient.connected ? ` ${styles.alertHide}` : '')} variant="secondary">
                     Подключение к брокеру очередей...
                 </Alert>
 
@@ -72,6 +83,19 @@ class MqttMessages extends Component {
     }
 }
 
-export default subscribe({
-    topic: CONSTANTS.MQTT_TOPIC
-})(MqttMessages);
+const mapStateToProps = (state) => {
+    return {
+        message: state.mqtt.message,
+        mqttClient: state.mqtt.mqttClient
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        connectToMqtt: (mqttServer) => dispatch(connectToMqtt(mqttServer)),
+        subscribe: (topic) => dispatch(subscribe(topic))
+    };
+};
+
+const MqttMessages = connect(mapStateToProps, mapDispatchToProps)(_MqttMessages);
+export default MqttMessages;

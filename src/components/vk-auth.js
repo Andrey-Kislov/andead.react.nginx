@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Connector } from '@andrey.kislov/mqtt-react';
 
 import { CONSTANTS } from '../services/constants';
 import styles from '../styles/vk-auth.css';
@@ -39,9 +38,7 @@ class VKAuth extends Component {
                     </div>
 
                     <div>
-                        <Connector mqttProps={CONSTANTS.MQTT_SERVER_URL}>
-                            <MqttMessages />
-                        </Connector>
+                        <MqttMessages />
                     </div>
                 </div>
             );

@@ -5,3 +5,8 @@ export const ACTION_AUTHORIZE = {
     setError:       'ACTION_AUTHORIZE_SET_ERROR',
     setAccessToken: 'ACTION_AUTHORIZE_SET_ACCESS_TOKEN'
 };
+
+export const ACTION_MQTT = {
+    setMqttClient:  'ACTION_MQTT_SET_MQTT_CLIENT',
+    setMessage:    'ACTION_MQTT_SET_MESSAGE'
+};
