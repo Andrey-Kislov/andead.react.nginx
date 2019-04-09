@@ -32,7 +32,7 @@ class _Index extends Component {
             <>
                 <VKAuth />
 
-                <br/>
+                {/* <br/>
                 <Router>
                     <>
                         <ul>
@@ -46,7 +46,7 @@ class _Index extends Component {
                             <Route component={Home} />
                         </Switch>
                     </>
-                </Router>
+                </Router> */}
             </>
         );
     }

@@ -5,6 +5,8 @@ import { CONSTANTS } from '../services/constants';
 import styles from '../styles/vk-auth.css';
 import SendNotification from './send-notification';
 import MqttMessages from './mqtt-messages';
+// import MainMenu from './main-menu';
+import Dashboard from './dashboard';
 
 class VKAuth extends Component {
     authorize() {
@@ -28,21 +30,25 @@ class VKAuth extends Component {
         //     return <>Ошибка загрузки компонента!</>
         // }
 
-        if (this.props.authUser) {
+        // if (this.props.authUser) {
             return (
-                <div>
-                    Hello {this.props.authUser.first_name}
+                <>
+                {/* <div> */}
+                    <Dashboard />
 
-                    <div>
-                        <SendNotification />
-                    </div>
+                    {/* Hello {this.props.authUser.first_name} */}
 
-                    <div>
+                    {/* <div> */}
+                        {/* <SendNotification /> */}
+                    {/* </div> */}
+
+                    {/* <div>
                         <MqttMessages />
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
+                </>
             );
-        }
+        // }
 
         return (
             <div
