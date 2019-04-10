@@ -3,8 +3,7 @@ import { connect } from 'react-redux';
 
 import { CONSTANTS } from '../services/constants';
 import styles from '../styles/vk-auth.css';
-import SendNotification from './send-notification';
-import MqttMessages from './mqtt-messages';
+import Dashboard from './dashboard';
 
 class VKAuth extends Component {
     authorize() {
@@ -29,19 +28,7 @@ class VKAuth extends Component {
         // }
 
         if (this.props.authUser) {
-            return (
-                <div>
-                    Hello {this.props.authUser.first_name}
-
-                    <div>
-                        <SendNotification />
-                    </div>
-
-                    <div>
-                        <MqttMessages />
-                    </div>
-                </div>
-            );
+            return <Dashboard />;
         }
 
         return (
