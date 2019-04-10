@@ -1,5 +1,6 @@
 .cardDeck {
     width: 100%;
+    margin: 0px;
 }
 
 @media screen and (min-width: 980px) /* For Desktop */ {

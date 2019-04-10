@@ -23,7 +23,7 @@ const styles = theme => ({
         display: 'flex',
     },
     toolbar: {
-        paddingRight: 24, // keep right padding when drawer closed
+        paddingRight: 24,
     },
     toolbarIcon: {
         display: 'flex',
@@ -60,13 +60,12 @@ const styles = theme => ({
     drawerPaper: {
         position: 'absolute',
         height: '100%',
-        // position: 'relative',
         whiteSpace: 'nowrap',
         width: drawerWidth,
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
-        }),
+        })
     },
     drawerPaperClose: {
         overflowX: 'hidden',
@@ -78,6 +77,9 @@ const styles = theme => ({
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing.unit * 9,
         },
+        [theme.breakpoints.down('sm')]: {
+            width: 0
+        }
     },
     appBarSpacer: theme.mixins.toolbar,
     content: {
@@ -86,16 +88,15 @@ const styles = theme => ({
         height: '100vh',
         overflow: 'auto',
     },
-    chartContainer: {
-        // marginLeft: -22,
-    },
     tableContainer: {
-        marginLeft: 70,
+        [theme.breakpoints.up('md')]: {
+            marginLeft: 70
+        },
         height: 320,
     },
     h5: {
         marginBottom: theme.spacing.unit * 2,
-    },
+    }
 });
 
 class Dashboard extends Component {
@@ -162,24 +163,15 @@ class Dashboard extends Component {
                         </IconButton>
                     </div>
                 <Divider />
-                <List><MainMenu /></List>
-                {/* <Divider /> */}
-                {/* <List>{secondaryListItems}</List> */}
+                <List>
+                    <MainMenu />
+                </List>
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
-                    {/* <Typography variant="h4" gutterBottom component="h2">
-                        Orders
-                    </Typography> */}
-                    {/* <Typography component="div" className={classes.chartContainer}> */}
-                        {/* <SimpleLineChart /> */}
-                        {/* <MqttMessages /> */}
-                    {/* </Typography> */}
-
                     <div className={classes.tableContainer}>
                         <MqttMessages />
                     </div>
-                    
                 </main>
             </div>
         );
