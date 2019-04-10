@@ -1,23 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { CONSTANTS } from '../services/constants';
-import styles from '../styles/vk-auth.css';
+import SignIn from './sign-in';
 import Dashboard from './dashboard';
 
 class VKAuth extends Component {
-    authorize() {
-        const redirectUri = `${location.origin}/social/provider/vk`;
-
-        location.href = 
-            'https://oauth.vk.com/authorize?' + 
-                'response_type=code&' + 
-                `client_id=${CONSTANTS.VK_CLIENT_ID}&` + 
-                'scope=offline&' + 
-                `redirect_uri=${redirectUri}&` + 
-                `state=${redirectUri}`;
-    }
-
     render() {
         if (this.props.loading) {
             return <>Загрузка...</>
@@ -31,14 +18,7 @@ class VKAuth extends Component {
             return <Dashboard />;
         }
 
-        return (
-            <div
-                className={styles.buttonAuth}
-                onClick={() => this.authorize()}
-            >
-                Войти через ВКонтакте
-            </div>
-        );
+        return <SignIn />;
     }
 }
 
