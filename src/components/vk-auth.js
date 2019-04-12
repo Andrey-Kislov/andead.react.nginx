@@ -15,13 +15,13 @@ class VKAuth extends Component {
         //     return <>Ошибка загрузки компонента!</>
         // }
 
-        if (this.props.authUser) {
+        // if (this.props.authUser) {
             return (
                 <Router>
                     <Dashboard />
                 </Router>
             );
-        }
+        // }
 
         return <SignIn />;
     }
