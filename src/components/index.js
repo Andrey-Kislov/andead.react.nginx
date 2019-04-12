@@ -2,13 +2,10 @@ import ReactDOM from 'react-dom';
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import { Provider, connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import configureStore from '../store/configureStore';
 import { checkAuthUser } from '../actions/authorize';
 import VKAuth from './vk-auth';
-import Home from './home';
-import About from './about';
 import * as serviceWorker from '../services/serviceWorker';
 import { initializeFirebase } from '../services/push-notifications';
 
@@ -28,27 +25,7 @@ class _Index extends Component {
     }
 
     render() {
-        return (
-            <>
-                <VKAuth />
-
-                {/* <br/>
-                <Router>
-                    <>
-                        <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to="/about">About</Link></li>
-                        </ul>
-
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            <Route path="/about" component={About} />
-                            <Route component={Home} />
-                        </Switch>
-                    </>
-                </Router> */}
-            </>
-        );
+        return <VKAuth />;
     }
 }
 

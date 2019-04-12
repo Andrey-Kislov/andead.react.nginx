@@ -15,6 +15,10 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MainMenu from './main-menu';
 import MqttMessages from './mqtt-messages';
+import { Route, Switch, Redirect } from 'react-router-dom';
+
+import Actions from './actions';
+import Log from './log';
 
 const drawerWidth = 240;
 
@@ -144,7 +148,7 @@ class Dashboard extends Component {
                             Dashboard
                         </Typography>
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
+                            <Badge badgeContent={0} color="secondary">
                                 <NotificationsIcon />
                             </Badge>
                         </IconButton>
@@ -164,13 +168,23 @@ class Dashboard extends Component {
                     </div>
                 <Divider />
                 <List>
-                    <MainMenu />
+                    <Switch>
+                        <Route exact path="/dashboard" render={() => <MainMenu selectedMenuIndex={0} />} />
+                        <Route path="/actions" render={() => <MainMenu selectedMenuIndex={1} />} />
+                        <Route path="/log" render={() => <MainMenu selectedMenuIndex={2} />} />
+                        <Route render={() => <MainMenu selectedMenuIndex={0} />} />
+                    </Switch>
                 </List>
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
                     <div className={classes.tableContainer}>
-                        <MqttMessages />
+                        <Switch>
+                            <Route exact path="/dashboard" component={MqttMessages} />
+                            <Route path="/actions" component={Actions} />
+                            <Route path="/log" component={Log} />
+                            <Route component={() => <Redirect to="/dashboard" />} />
+                        </Switch>
                     </div>
                 </main>
             </div>
