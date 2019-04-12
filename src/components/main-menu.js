@@ -12,8 +12,13 @@ const styles = theme => ({
     root: {
         width: '100%',
         maxWidth: 360,
-        backgroundColor: theme.palette.background.paper,
+        backgroundColor: theme.palette.background.paper
     },
+    link: {
+        '&:hover': {
+            textDecoration: 'none'
+        }
+    }
 });
 
 class MainMenu extends Component {
@@ -27,12 +32,15 @@ class MainMenu extends Component {
     
     changeMenuItem(menuIndex) {
         this.setState({ selectedMenuIndex: menuIndex });
+        this.props.handleDrawerClose();
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
             <>
-                <Link to="/">
+                <Link className={classes.link} to="/">
                     <ListItem
                         button
                         selected={this.state.selectedMenuIndex === 0}
@@ -44,7 +52,7 @@ class MainMenu extends Component {
                         <ListItemText primary="Устройства" />
                     </ListItem>
                 </Link>
-                <Link to="/actions">
+                <Link className={classes.link} to="/actions">
                     <ListItem
                         button
                         selected={this.state.selectedMenuIndex === 1}
@@ -56,7 +64,7 @@ class MainMenu extends Component {
                         <ListItemText primary="Правила" />
                     </ListItem>
                 </Link>
-                <Link to="/log">
+                <Link className={classes.link} to="/log">
                     <ListItem
                         button
                         selected={this.state.selectedMenuIndex === 2}
