@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import SignIn from './sign-in';
 import Dashboard from './dashboard';
@@ -15,7 +16,11 @@ class VKAuth extends Component {
         // }
 
         if (this.props.authUser) {
-            return <Dashboard />;
+            return (
+                <Router>
+                    <Dashboard />
+                </Router>
+            );
         }
 
         return <SignIn />;
