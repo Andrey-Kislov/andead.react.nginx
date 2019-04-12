@@ -169,10 +169,10 @@ class Dashboard extends Component {
                 <Divider />
                 <List>
                     <Switch>
-                        <Route exact path="/dashboard" render={() => <MainMenu selectedMenuIndex={0} />} />
-                        <Route path="/actions" render={() => <MainMenu selectedMenuIndex={1} />} />
-                        <Route path="/log" render={() => <MainMenu selectedMenuIndex={2} />} />
-                        <Route render={() => <MainMenu selectedMenuIndex={0} />} />
+                        <Route exact path="/dashboard" render={() => <MainMenu handleDrawerClose={this.handleDrawerClose} selectedMenuIndex={0} />} />
+                        <Route path="/actions" render={() => <MainMenu handleDrawerClose={this.handleDrawerClose} selectedMenuIndex={1} />} />
+                        <Route path="/log" render={() => <MainMenu handleDrawerClose={this.handleDrawerClose} selectedMenuIndex={2} />} />
+                        <Route render={() => <MainMenu handleDrawerClose={this.handleDrawerClose} selectedMenuIndex={0} />} />
                     </Switch>
                 </List>
                 </Drawer>
