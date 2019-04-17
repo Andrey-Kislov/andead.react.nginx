@@ -16,9 +16,9 @@ export default class Device extends Component {
             <Card className={styles.card}>
                 <Card.Body>
                     <Card.Title>{info.name}</Card.Title>
-                    <Card.Img className={styles.cardImg} variant="top" src="/images/devices/DJT11LM.jpg" />
+                    <Card.Img className={styles.cardImg} variant="top" src={encodeURI(info.image)} />
                     <Card.Text>
-                        {/* Датчик обнаружения вибрации Aqara для умного дома Xiaomi. */}
+                        {info.description}
                     </Card.Text>
                     <Card.Text>
                         

@@ -78,6 +78,14 @@ class _MqttMessages extends Component {
                 </Alert>
             );
         }
+
+        if (this.state.devices.length === 0) {
+            return (
+                <Alert className={styles.alert} variant="light">
+                    Устройств нет
+                </Alert>
+            );
+        }
         
         if (!this.props.mqttClient) {
             return null;
@@ -92,17 +100,13 @@ class _MqttMessages extends Component {
                 </Alert>
 
                 <CardDeck className={styles.cardDeck}>
-                    {/* <VibrationSensor sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_VIBRATION_SENSOR ? sensor.payload : {}} />
-                    <MotionSensor sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_BODY_SENSOR ? sensor.payload : {}} />
-                    <SwitchButton sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_SWITCH ? sensor.payload : {}} /> */}
-
-                    {
-                        this.state.devices.map(device => {
-                            return (
-                                <Device key={device.id} info={device} payload={sensor.topic === device.topic ? sensor.payload : {}} />
-                            )
-                        })
-                    }
+                {
+                    this.state.devices.map(device => {
+                        return (
+                            <Device key={device.id} info={device} payload={sensor.topic === device.topic ? sensor.payload : {}} />
+                        )
+                    })
+                }
                 </CardDeck>
             </>
         );
