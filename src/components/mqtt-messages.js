@@ -4,14 +4,26 @@ import { connect } from 'react-redux';
 
 import { CONSTANTS } from '../services/constants';
 import { connect as connectToMqtt, subscribe } from '../actions/mqtt';
+import { getData } from '../services/common';
 import styles from '../styles/cards.css';
 import VibrationSensor from './vibration-sensor';
 import MotionSensor from './motion-sensor';
 import SwitchButton from './switch-button';
+import Device from './device';
 
 class _MqttMessages extends Component {
     static defaultProps = {
         data: []
+    }
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            loading: true,
+            hasError: false,
+            devices: []
+        };
     }
 
     getAction(action) {
@@ -32,15 +44,40 @@ class _MqttMessages extends Component {
     }
 
     componentDidMount() {
-        this.props.connectToMqtt(CONSTANTS.MQTT_SERVER_URL);
+        getData('/mqtt/devices')
+            .then(data => {
+                if (data.devices.length > 0) {
+                    this.props.connectToMqtt(CONSTANTS.MQTT_SERVER_URL);
 
-        this.props.subscribe(CONSTANTS.MQTT_TOPIC_VIBRATION_SENSOR);
-        this.props.subscribe(CONSTANTS.MQTT_TOPIC_BODY_SENSOR);
-        this.props.subscribe(CONSTANTS.MQTT_TOPIC_SWITCH);
+                    this.setState({ devices: data.devices });
+
+                    data.devices.forEach(device => {
+                        this.props.subscribe(device.topic);
+                    });
+                }
+            })
+            .catch(() => this.setState({ hasError: true }))
+            .finally(() => this.setState({ loading: false }));
     }
 
     render() {
         console.log(this.props.message);
+
+        if (this.state.loading) {
+            return (
+                <Alert className={styles.alert} variant="secondary">
+                    Получение устройств...
+                </Alert>
+            );
+        }
+
+        if (this.state.hasError) {
+            return (
+                <Alert className={styles.alert} variant="warning">
+                    Ошибка получения устройств
+                </Alert>
+            );
+        }
         
         if (!this.props.mqttClient) {
             return null;
@@ -55,9 +92,17 @@ class _MqttMessages extends Component {
                 </Alert>
 
                 <CardDeck className={styles.cardDeck}>
-                    <VibrationSensor sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_VIBRATION_SENSOR ? sensor.payload : {}} />
+                    {/* <VibrationSensor sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_VIBRATION_SENSOR ? sensor.payload : {}} />
                     <MotionSensor sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_BODY_SENSOR ? sensor.payload : {}} />
-                    <SwitchButton sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_SWITCH ? sensor.payload : {}} />
+                    <SwitchButton sensor={sensor.topic === CONSTANTS.MQTT_TOPIC_SWITCH ? sensor.payload : {}} /> */}
+
+                    {
+                        this.state.devices.map(device => {
+                            return (
+                                <Device key={device.id} info={device} payload={sensor.topic === device.topic ? sensor.payload : {}} />
+                            )
+                        })
+                    }
                 </CardDeck>
             </>
         );
