@@ -81,7 +81,7 @@ class _MqttMessages extends Component {
 
         if (this.state.devices.length === 0) {
             return (
-                <Alert className={styles.alert} variant="light">
+                <Alert className={styles.alert} variant="secondary">
                     Устройств нет
                 </Alert>
             );
